@@ -1,0 +1,54 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { font-family: Arial, sans-serif; background: #f2f2f2; }
+.page { max-width: 900px; margin: 0 auto; padding: 20px; text-align: center; }
+h1 { margin-bottom: 16px; }
+
+/* Outer wrapper: fluid width, fixed aspect ratio */
+.slider { position: relative; width: 100%; aspect-ratio: 16 / 9; }
+
+/* Viewport mask */
+.slider-viewport { width: 100%; height: 100%; overflow: hidden; border-radius: 10px; }
+
+/* Flex track that slides on the X-axis (GPU accelerated) */
+.slider-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+  will-change: transform;
+}
+
+.slide {
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Arrows */
+.slider-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 42px; height: 42px; border: none; border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5); color: #fff; font-size: 22px; cursor: pointer;
+}
+.slider-btn:hover { background: rgba(0, 0, 0, 0.8); }
+.slider-btn.prev { left: 10px; }
+.slider-btn.next { right: 10px; }
+
+/* Dots */
+.slider-dots {
+  position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 8px;
+}
+.dot {
+  width: 12px; height: 12px; border: none; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5); cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+.dot.active { background: #fff; transform: scale(1.3); }
+
+@media (max-width: 600px) {
+  .slider-btn { width: 34px; height: 34px; font-size: 18px; }
+  .dot { width: 10px; height: 10px; }
+}
